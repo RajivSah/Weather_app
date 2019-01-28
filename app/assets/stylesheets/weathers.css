@@ -13,10 +13,19 @@
     margin: .2em;
 }
 .result{
-    font-size: 4em;
+    font-size: 2em;
     margin: .5em;
 }
 .error{
     font-size: 2em;
     margin: .5em;
+}
+
+div.table > table > tbody > tr > th,td {
+    font-size: 1.2em;
+    padding: .5em ;
+}
+div.table > table > tbody > tr:nth-child(1){
+    background-color: gray;
+    color: white;
 }

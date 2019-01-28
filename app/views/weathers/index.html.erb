@@ -1,18 +1,38 @@
-<div class="container">
+<div class='container'>
     <h1>Find Current Weather</h1>
     <form id='location-form' class='location-form'>
         <p><label for='location'>Enter Location</label></p>
-        <p><input type="text" name="location" id="location"></p>
-        <p><button type="submit">Find</button></p>
+        <p><input type='text' name='location' id='location'></p>
+        <p><button type='submit'>Find</button></p>
     </form>
-    <div class="result">
-        <% if @temprature %>
-            <%= @temprature %> &deg;C
-        <% end %>
-    </div>
-    <div class="error">
-        <% if @error %>
+    <% if @temprature %>
+        <div class='result'>
+            OpenWeather <%= @temprature1 %> &deg;C <br>
+            Apiux <%= @temprature2 %> &deg;C <br>
+            Average <%= @temprature %> &deg;C
+        </div>
+    <% end %>
+    <% if @error %>
+         <div class='error'>
             <%= @error %>
-        <% end %>
-    </div>
+        </div>
+    <% end %>
+    <% if @weathers %>
+        <div class='table'>
+            <table>
+                <tr>
+                    <th>City</th>
+                    <th>Temprature</th>
+                    <th>Time</th>
+                </tr>
+                <% @weathers.each do |weather| %>
+                  <tr>
+                    <td><%= weather.city %></td>
+                    <td><%= weather.temp %></td>
+                    <td><%= weather.created_at %></td>
+                  </tr>
+                <% end %>
+            </table>
+        </div>
+    <% end %>
 </div>

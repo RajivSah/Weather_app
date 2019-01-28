@@ -10,17 +10,19 @@ class WeathersController < ApplicationController
       url2 = 'http://api.apixu.com/v1/current.json?'\
               "key=7f0582ae268941a1b2f41827192601&q=#{params[:location]}"
       begin
-        temprature1 = get_temperature(url1)['main']['temp']
-        temprature2 = get_temperature(url2)['current']['temp_c']
-        @temprature = (temprature1 + temprature2) / 2
+        @temprature1 = get_temperature(url1)[:main][:temp]
+        @temprature2 = get_temperature(url2)[:current][:temp_c]
+        @temprature = (@temprature1 + @temprature2) / 2
+        Weather.create(city: params[:location], temp: @temprature)
       rescue RestClient::NotFound
         @error = 'Please enter a valid location'
       end
     end
+    @weathers = Weather.all
   end
 
   def get_temperature(url)
     response = RestClient.get url
-    JSON.parse response.body
+    eval response.body
   end
 end
